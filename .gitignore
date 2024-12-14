@@ -1,3 +1,6 @@
+# For arch linux systems, ignore VM for pip libraries
+myenv/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
