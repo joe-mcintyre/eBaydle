@@ -14,18 +14,23 @@ session = httpx.Client(
 )
 
 def parse_product(response: httpx.Response) -> dict:
-    """Parse Ebay's product listing page for core product data"""
+    """
+    Scrapes a product's core data from a ebay url by selecting important html sections.
+    Returns item library with all related data.
+
+    Args:
+        response: httpx response from an exterior http session object
+    """
     sel = Selector(response.text)
-    # define helper functions that chain the extraction process
+    # helper functions 
     css_join = lambda css: "".join(sel.css(css).getall()).strip()  # join all selected elements
     css = lambda css: sel.css(css).get("").strip()  # take first selected element and strip of leading/trailing spaces
 
     item = {}
     item["url"] = css('link[rel="canonical"]::attr(href)')
-    item["id"] = item["url"].split("/itm/")[1].split("?")[0]  # we can take ID from the URL
+    item["id"] = item["url"].split("/itm/")[1].split("?")[0]  # grab id from url
     item["price_original"] = css(".x-price-primary>span::text")
-    item["price_converted"] = css(".-price-approx__price ::text")  # ebay automatically converts price for some regions
-    item["name"] = css_join("h1 span::text")
+    item["price_converted"] = css(".-price-approx__price ::text")  # hopefully can get this to work later item["name"] = css_join("h1 span::text")
     item["seller_name"] = sel.xpath("//div[contains(@class,'info__about-seller')]/a/span/text()").get()
     item["seller_url"] = sel.xpath("//div[contains(@class,'info__about-seller')]/a/@href").get().split("?")[0]
     item["photos"] = sel.css('.ux-image-filmstrip-carousel-item.image img::attr("src")').getall()  # carousel images
@@ -49,12 +54,15 @@ def parse_product(response: httpx.Response) -> dict:
 
     return item
 
+response = session.get("https://www.ebay.com/itm/332562282948")
+product_data = parse_product(response)
+print(json.dumps(product_data, indent=2))
 
-# response = session.get("https://www.ebay.com/itm/332562282948")
+response = session.get("https://www.ebay.com/itm/334520993657")
+product_data = parse_product(response)
+print(json.dumps(product_data, indent=2))
 # response = session.get("https://www.ebay.com/p/10012") # want to inevitably switch to this url for scraping
 response = session.get("https://www.ebay.com/itm/204777023543")
-
 product_data = parse_product(response)
-
-# print results in JSON format
 print(json.dumps(product_data, indent=2))
+
