@@ -30,7 +30,11 @@ def parse_product(response: httpx.Response) -> dict:
     item["seller_url"] = sel.xpath("//div[contains(@class,'info__about-seller')]/a/@href").get().split("?")[0]
     item["photos"] = sel.css('.ux-image-filmstrip-carousel-item.image img::attr("src")').getall()  # carousel images
     item["photos"].extend(sel.css('.ux-image-carousel-item.image img::attr("src")').getall())  # main image
-    # description is an iframe (independant page). We can keep it as an URL or scrape it later.
+    item["photos"].extend(sel.css('.ux-image-grid-item img::attr(src)').getall())  # extra images
+
+    item["photos"] = list(set(item["photos"])) # Remove dups
+
+    # description is iframe independant page, can keep as URL or scrape it later?
     item["description_url"] = css("iframe#desc_ifr::attr(src)")
     
     # feature details from the description table:
