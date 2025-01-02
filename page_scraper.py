@@ -53,7 +53,7 @@ def parse_product(response: httpx.Response) -> dict:
     item["features"] = features
 
     return item
-
+"""
 response = session.get("https://www.ebay.com/itm/332562282948")
 product_data = parse_product(response)
 print(json.dumps(product_data, indent=2))
@@ -65,4 +65,29 @@ print(json.dumps(product_data, indent=2))
 response = session.get("https://www.ebay.com/itm/204777023543")
 product_data = parse_product(response)
 print(json.dumps(product_data, indent=2))
+"""
+
+response = session.get("https://www.ebay.com/itm/332562282948")
+product_data = parse_product(response)
+print(json.dumps(product_data, indent=2))
+
+
+try:
+    response = session.get("https://www.ebay.com/itm/1239034")
+    product_data = parse_product(response) 
+    print(json.dumps(product_data, indent=2))
+except IndexError:
+    print("invalid url index")
+
+try:
+    response = session.get("https://www.ebay.com/sch/i.html?&_nkw=shoe")
+    product_data = parse_product(response) 
+    print(json.dumps(product_data, indent=2))
+except IndexError:
+    print("invalid url index")
+
+
+
+
+
 
