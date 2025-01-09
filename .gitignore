@@ -1,4 +1,7 @@
 # For arch linux systems, ignore VM for pip libraries
+
+.env
+
 myenv/
 
 # Byte-compiled / optimized / DLL files

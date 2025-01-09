@@ -21,10 +21,10 @@ if __name__ == "__main__":
             output = parse_product_json(f"{url}")
             if output not in ["list index out of range", "timeout", "error"]:
                 product_count += 1
-            print(f"{output}")
+            #print(f"{output}")
 
 
-        print(f"\n\nPRODUCT COUNT: {product_count}\n\n")
+        print(f"\nPRODUCT COUNT: {product_count}")
             
-    print("\n\n\n\nDONEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
+    print("\n\nDONEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
         
