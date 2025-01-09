@@ -10,7 +10,8 @@ session = httpx.Client(
         "Accept-Encoding": "gzip, deflate, br",
     },
     http2=True,
-    follow_redirects=True
+    follow_redirects=True,
+    timeout=10
 )
 
 def parse_product(response: httpx.Response) -> dict:
@@ -60,8 +61,14 @@ def parse_product_json(url):
         response = session.get(f"{url}")
         product_data = parse_product(response)
         return json.dumps(product_data, indent=2) # probably remove indent later
+    except httpx.ReadTimeout:
+        print(f"Timeout occurred on URL: {url}")
+        return "timeout"
     except IndexError as i_error:
-        return i_error
+        return str(i_error)
+    except Exception as e:
+        print(f"error occurred on URL: {url}, {str(e)}")
+        return "error"
 
 """
 try:

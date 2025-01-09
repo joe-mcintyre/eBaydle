@@ -19,7 +19,7 @@ if __name__ == "__main__":
 
         for url in url_list:
             output = parse_product_json(f"{url}")
-            if not output == "list index out of range":
+            if output not in ["list index out of range", "timeout", "error"]:
                 product_count += 1
             print(f"{output}")
 
