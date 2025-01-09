@@ -29,8 +29,9 @@ def parse_product(response: httpx.Response) -> dict:
     item = {}
     item["url"] = css('link[rel="canonical"]::attr(href)')
     item["id"] = item["url"].split("/itm/")[1].split("?")[0]  # grab id from url
+    item["name"] = css(".x-item-title__mainTitle>span::text")
     item["price_original"] = css(".x-price-primary>span::text")
-    item["price_converted"] = css(".-price-approx__price ::text")  # hopefully can get this to work later item["name"] = css_join("h1 span::text")
+    item["price_converted"] = css(".-price-approx__price ::text")
     item["seller_name"] = sel.xpath("//div[contains(@class,'info__about-seller')]/a/span/text()").get()
     item["seller_url"] = sel.xpath("//div[contains(@class,'info__about-seller')]/a/@href").get().split("?")[0]
     item["photos"] = sel.css('.ux-image-filmstrip-carousel-item.image img::attr("src")').getall()  # carousel images
@@ -53,20 +54,26 @@ def parse_product(response: httpx.Response) -> dict:
     item["features"] = features
 
     return item
-"""
-response = session.get("https://www.ebay.com/itm/332562282948")
-product_data = parse_product(response)
-print(json.dumps(product_data, indent=2))
 
-response = session.get("https://www.ebay.com/itm/334520993657")
-product_data = parse_product(response)
-print(json.dumps(product_data, indent=2))
-# response = session.get("https://www.ebay.com/p/10012") # want to inevitably switch to this url for scraping
-response = session.get("https://www.ebay.com/itm/204777023543")
-product_data = parse_product(response)
-print(json.dumps(product_data, indent=2))
+def parse_product_json(url):
+    try:
+        response = session.get(f"{url}")
+        product_data = parse_product(response)
+        return json.dumps(product_data, indent=2) # probably remove indent later
+    except IndexError as i_error:
+        return i_error
+
+"""
+try:
+    response = session.get("https://www.ebay.com/itm/286249399022")
+    product_data = parse_product(response) 
+    print(json.dumps(product_data, indent=2))
+except IndexError:
+    print("invalid url index")
 """
 
+"""
+# example usage
 response = session.get("https://www.ebay.com/itm/332562282948")
 product_data = parse_product(response)
 print(json.dumps(product_data, indent=2))
@@ -85,9 +92,4 @@ try:
     print(json.dumps(product_data, indent=2))
 except IndexError:
     print("invalid url index")
-
-
-
-
-
-
+"""

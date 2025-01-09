@@ -8,3 +8,5 @@ To install the libraries required to scrape, run this command:
 ```sh
 pip install -r libraries.txt
 ```
+
+Dictionary used to return random words taken from 'https://github.com/nightblade9/simple-english-dictionary/blob/main/processed/merged.json'
