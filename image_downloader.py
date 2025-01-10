@@ -1,3 +1,7 @@
+"""
+I dont even use this code, as I just use the image urls to display them,
+still pretty sick tho ngl
+"""
 import os
 from pathlib import Path
 import httpx
