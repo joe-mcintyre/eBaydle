@@ -1,27 +1,15 @@
 from pymongo import MongoClient
-#import pymongo
 from dotenv import load_dotenv
 import json
 import os
 
 load_dotenv()
 
-hostname = os.getenv('MONGO_HOST', 'localhost')  # Default to 'localhost' if not found
-port = int(os.getenv('MONGO_PORT', 27017))       # Default to 27017 if not found
+hostname = os.getenv('MONGO_HOST', 'localhost')  # 2nd parameter is default
+port = int(os.getenv('MONGO_PORT', 27017)) 
 
-# Create a MongoClient instance
-#client = MongoClient(host=hostname, port=port)
+# Create MongoClient instance
 client = MongoClient(host=hostname, port=port)
-"""
-# Test the connection
-try:
-    client.admin.command('ping')
-    print("MongoDB connection successful!")
-except Exception as e:
-    print(f"Failed to connect to MongoDB: {e}")
-"""
-
-
 db = client.ebaydle
 collection = db.product
 
@@ -37,12 +25,11 @@ def db_add_product(json_data):
         if isinstance(json_data, list):
             # Insert multiple documents if the JSON file contains an array
             collection.insert_many(json_data)
-            print("inserted many")
+            print("Many Products Inserted")
         else:
             # Insert a single document if the JSON file contains a single object
             collection.insert_one(json_data)
-            print("inserted one")
-        print("Data inserted successfully!")
+            print("1 Product Inserted")
         return 0
     except Exception as e:
         print(f"Error inserting data: {e}")
