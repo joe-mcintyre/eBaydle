@@ -6,19 +6,31 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <p>
+          5247839 <code> _ _ _code_ _ _ </code> jkwedaf 
+        </p>
+
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+          <code>typescript gun</code>
         </p>
         <a
           className="App-link"
-          href="https://reactjs.org"
+          href="http://localhost:3000"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          #RELOAD#
         </a>
-      </header>
+        <a
+            className="App-link"
+            href="#"
+            onClick={() => (window.location.href = 'http://localhost:3000')}
+        >
+          #RELOAD IN PAGE#
+        </a>
+
+</header>
     </div>
   );
 }
