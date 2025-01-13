@@ -2,12 +2,12 @@ from search_scraper import parse_search_list
 from page_scraper import * 
 from words.return_words import *
 from mongo_operations import db_add_product
-#   from mongo_operations import display_db
+from mongo_operations import display_db
 
 if __name__ == "__main__":
 
-    #   display_db()
-    #   exit()
+    display_db()
+    exit()
     product_count = 0
 
     while product_count < 1000:

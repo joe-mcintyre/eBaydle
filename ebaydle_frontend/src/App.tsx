@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { addProduct } from './services/api';
 import logo from './logo.svg';
 import './App.css';
 
@@ -36,3 +37,24 @@ function App() {
 }
 
 export default App;
+
+/*
+    *
+const App: React.FC = () => {
+  const [name, setName] = useState('');
+  const [value, setValue] = useState(0);
+
+  const handleSubmit = async () => {
+    await addItem(name, value);
+    alert('Item added');
+  };
+
+  return (
+    <div>
+      <input type="text" onChange={(e) => setName(e.target.value)} placeholder="Name" />
+      <input type="number" onChange={(e) => setValue(Number(e.target.value))} placeholder="Value" />
+      <button onClick={handleSubmit}>Submit</button>
+    </div>
+  );
+};
+*/
