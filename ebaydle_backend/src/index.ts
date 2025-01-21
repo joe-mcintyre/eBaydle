@@ -12,6 +12,7 @@ app.use(express.json());
 
 app.use('/api/products', productRoutes); 
 
+/*
 mongoose.connect('mongodb://localhost:27017/ebaydle', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -21,10 +22,13 @@ mongoose.connect('mongodb://localhost:27017/ebaydle', {
   
 
 
-/*
 app.get('/', (req: Request, res: Response) => {
     res.send("spaghetti monster");
 });
 */
 
 app.listen(port, () => console.log('Server running on port 5000'));
+
+
+// npm run build
+// npm start
