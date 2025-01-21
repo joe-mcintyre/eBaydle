@@ -1,17 +1,37 @@
-import { Router } from 'express';
-import Product from '../models/productModel';
+import express, { Request, Response } from "express";
+import { ObjectId } from "mongodb";
+import { collections } from "../services/database.service";
+import Product from "../models/product";
 
-const router = Router();
+//global config
+export const router = express.Router();
 
-router.post('/add-product', async (req, res) => {
-    const { name, price } = req.body;
+router.use(express.json());
+
+// maps collection to model //hopefully
+const mapToProductModel = (dbRecord: any): Product => {
+    return new Product(
+        dbRecord.name,
+        parseFloat(dbRecord.price_original.replace(/[^0-9.-]+/g, "")) || 0, // regex work pls
+        dbRecord.url,
+        dbRecord.photos || [],
+        dbRecord.seller_name,
+        dbRecord._id
+    );
+};
+
+// GET ROUTE
+router.get("/", async (_req: Request, res: Response) => {
     try {
-        const newProduct = new Product({name, price});
-        await newProduct.save();
-        res.status(201).send(newProduct);
+        if (!collections.products) {
+            throw new Error("Products collection is not initialized.");
+        }
+        const dbRecords = await collections.products.find({}).toArray();
+        const products = dbRecords.map(mapToProductModel);
+
+        res.status(200).send(products);
     } catch (error) {
-        res.status(500).send({ error: 'Product failed to be added'})
+        const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
+        res.status(500).send(errorMessage);
     }
 });
-
-export default router;

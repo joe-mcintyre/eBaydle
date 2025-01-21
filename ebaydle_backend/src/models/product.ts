@@ -1,8 +1,8 @@
-import { ObjectTd } from "mongodb";
+import { ObjectId } from "mongodb";
 
 // Class Implementation
 export default class Product {
-    constructor(public name: string, public price: number,
-               public page_url: string, public images: string[],
-               public id?: ObjectId)
+    constructor(public name: string, public price_original: number,
+               public url: string, public photos: string[],
+               public seller_name: string, public _id?: ObjectId) {}
 }
