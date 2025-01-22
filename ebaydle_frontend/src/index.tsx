@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import Heading from './heading';
 import ProductList from './ProductList';
+import RandomProduct from './product';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
@@ -11,7 +12,8 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Heading />
-    <ProductList />
+    <RandomProduct />
+
   </React.StrictMode>
 );
 
