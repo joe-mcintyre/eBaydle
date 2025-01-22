@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { addProduct } from './services/api';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import { getProducts } from './services/api';
+import logo from './logo.svg'; //delete later
 import './App.css';
 
 function App() {

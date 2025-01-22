@@ -21,7 +21,7 @@ const mapToProductModel = (dbRecord: any): Product => {
 };
 
 // GET ROUTE
-router.get("/", async (_req: Request, res: Response) => {
+router.get("/products", async (_req: Request, res: Response) => {
     try {
         if (!collections.products) {
             throw new Error("Products collection is not initialized.");
