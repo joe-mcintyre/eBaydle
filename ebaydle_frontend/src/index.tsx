@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
-import Component from './Component';
+import Heading from './heading';
 import ProductList from './ProductList';
 import reportWebVitals from './reportWebVitals';
 
@@ -11,6 +10,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
+    <Heading />
     <ProductList />
   </React.StrictMode>
 );

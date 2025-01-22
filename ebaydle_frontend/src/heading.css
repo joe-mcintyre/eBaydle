@@ -1,0 +1,31 @@
+.header {
+    text-align: center;
+    margin-top: 0;
+    border-bottom: 3px solid grey;
+}
+.site-header {
+  margin: 2em 4em;
+  padding: 0 10px;
+}
+
+.ebay-font {
+    margin: 0;
+    font-family: 'Market Sans', sans-serif;
+    font-weight: 570;
+    letter-spacing: -16px;
+    font-size: 10em;
+}
+
+span.red {
+    color: #E53238;
+}
+span.blue {
+    color: #0064D2;
+}
+span.green {
+    color: #86B817;
+}
+span.yellow {
+    color: #F5AF02;
+}
+
