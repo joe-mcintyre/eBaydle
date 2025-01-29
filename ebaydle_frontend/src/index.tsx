@@ -6,6 +6,8 @@ import ProductList from './ProductList';
 import RandomProduct from './product';
 import reportWebVitals from './reportWebVitals';
 
+// import Hide from './Hide';
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );

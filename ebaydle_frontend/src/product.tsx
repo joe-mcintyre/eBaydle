@@ -36,6 +36,8 @@ const RandomProduct: React.FC = () => {
             {product ? (
                 <>
                     <h2>Name: {product.name}</h2>
+                    <p>ID: {product._id}</p>
+                    <p>URL: {product.url}</p>
                     <p>Price: ${product.price_original}</p>
                     <p>Seller: {product.seller_name}</p>
                     {product.photos.map((photo, index) => (

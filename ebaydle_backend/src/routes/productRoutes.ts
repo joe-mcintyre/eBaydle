@@ -60,3 +60,29 @@ router.get("/rand_product", async (_req: Request, res: Response) => {
     }
 });
 
+router.post("/getPrice", async (req: Request, res: Response) => {
+    try {
+        const { productID } = req.body;
+
+        if (!collections.products) {
+            throw new Error("Products collection is not initialized.");
+        }
+
+        if (!ObjectId.isValid(productID)) {
+            return res.status(400).send("Invalid product ID.");
+        }
+
+        const product = await collections.products.findOne({ _id: new ObjectId(productID) });
+
+        if (!product) {
+            return res.status(404).send("Product not found.");
+        }
+
+        res.status(200).send({ price: product.price_original });
+    } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
+        res.status(500).send(errorMessage);
+    }
+});
+
+
